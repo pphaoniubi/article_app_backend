@@ -42,6 +42,10 @@ public class ArticleController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/health")
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("Healthy");
+    }
 
 
 }
