@@ -16,6 +16,12 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+    @GetMapping("/health")
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("Healthy");
+    }
+
+
     // Get all article titles
     @GetMapping("/titles")
     public List<Map<String, Object>> getAllArticleTitles() {
@@ -40,11 +46,6 @@ public class ArticleController {
         return articleService.getArticleById(id)
                 .map(article -> ResponseEntity.ok(article))
                 .orElse(ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("/health")
-    public ResponseEntity<String> healthCheck() {
-        return ResponseEntity.ok("Healthy");
     }
 
 
