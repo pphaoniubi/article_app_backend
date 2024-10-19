@@ -1,0 +1,6 @@
+com\example\article_backend\ArticleClass\ArticleService.class
+com\example\article_backend\ArticleClass\ArticleRepository.class
+com\example\article_backend\SecurityConfig.class
+com\example\article_backend\ArticleClass\Article.class
+com\example\article_backend\DemoApplication.class
+com\example\article_backend\ArticleClass\ArticleController.class
