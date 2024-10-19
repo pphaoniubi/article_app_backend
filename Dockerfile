@@ -1,26 +1,14 @@
-# Use an official Node.js runtime as a parent image
-FROM node:18-alpine
+# Use a base image with Java 17
+FROM openjdk:17-jdk-alpine
 
-# Set the working directory in the container
+# Set the working directory inside the container
 WORKDIR /app
 
-# Install pnpm globally and clean npm cache to reduce image size
-RUN npm install -g pnpm && npm cache clean --force
+# Copy the built Spring Boot JAR file into the container
+COPY target/demo-0.0.1-SNAPSHOT.jar /app/app.jar
 
-# Copy package.json and pnpm-lock.yaml (if available)
-COPY package.json pnpm-lock.yaml ./
-
-# Install dependencies
-RUN pnpm install
-
-# Copy the rest of the application code
-COPY . .
-
-# Build the application
-RUN pnpm run build
-
-# Expose the port the app runs on (default for Cloud Run is 8080)
+# Expose the port (default for Spring Boot is 8080)
 EXPOSE 8080
 
-# Define the command to run the application
-CMD ["pnpm", "run", "preview", "--host", "0.0.0.0", "--port", "8080"]
+# Command to run the Spring Boot application
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
