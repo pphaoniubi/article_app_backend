@@ -1,5 +1,5 @@
 # Use a base image with Java 17
-FROM openjdk:21-jdk-alpine
+FROM maven:3.8-openjdk-21 as maven
 
 # Set the working directory inside the container
 WORKDIR /app
