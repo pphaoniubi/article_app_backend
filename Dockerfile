@@ -15,19 +15,37 @@
 
 
 
-FROM maven:3.8-openjdk-17 as maven
+# First Stage: Build the application
+FROM maven:3.8-openjdk-21 as maven
 WORKDIR /app
+
+# Copy the pom.xml file and download dependencies
 COPY ./pom.xml .
 RUN mvn dependency:go-offline
+
+# Copy the source code
 COPY ./src ./src
+
+# Package the application, skipping tests
 RUN mvn package -DskipTests=true
+
+# Change directory to where the jar is located
 WORKDIR /app/target/dependency
+
+# Extract the jar file
 RUN jar -xf ../employeemanagementservice.jar
 EXPOSE 8080
 
-FROM ibm-semeru-runtimes:open-17-jre-centos7
+# Second Stage: Create the runtime image
+FROM ibm-semeru-runtimes:open-21-jre-centos7
+
+# Argument for the dependency path
 ARG DEPENDENCY=/app/target/dependency
+
+# Copy the extracted files from the build stage
 COPY --from=maven ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=maven ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=maven ${DEPENDENCY}/BOOT-INF/classes /app
-CMD java -server -Xmx1024m -Xss1024k -XX:MaxMetaspaceSize=135m -XX:CompressedClassSpaceSize=28m -XX:ReservedCodeCacheSize=13m -XX:+IdleTuningGcOnIdle -Xtune:virtualized -cp app:app/lib/* com.greatlearning.employeemanagementservice.Application
+
+# Command to run the application
+CMD ["java", "-server", "-Xmx1024m", "-Xss1024k", "-XX:MaxMetaspaceSize=135m", "-XX:CompressedClassSpaceSize=28m", "-XX:ReservedCodeCacheSize=13m", "-XX:+IdleTuningGcOnIdle", "-Xtune:virtualized", "-cp", "app:app/lib/*", "com.greatlearning.employeemanagementservice.Application"]
