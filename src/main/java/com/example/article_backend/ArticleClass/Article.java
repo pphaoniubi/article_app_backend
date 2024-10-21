@@ -11,41 +11,30 @@ public class Article {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String title;
     @Lob
     @Column(columnDefinition = "MEDIUMTEXT")
     private String content;
-    private String category;
     private int readCount; // New field for read count
     private LocalDate publishDate;
 
     // Constructor
-    public Article(int id, String title, String content, String category) {
+    public Article(Long id, String title, String content) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.category = category;
         this.readCount = 0; // Initialize read count to 0
         this.publishDate = LocalDate.now();
     }
 
     public Article() {}
 
-    // Getters and Setters
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

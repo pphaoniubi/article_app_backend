@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 
 @RestController
@@ -18,8 +19,8 @@ public class ArticleController {
 
     // Get all article titles
     @GetMapping("/titles")
-    public List<Map<String, Object>> getAllArticleTitles() {
-        return articleService.getAllArticleInfo();
+    public List<Article> getAllArticleTitles() {
+        return articleService.getAllArticles();
     }
 
     @PutMapping("/{id}/increment-read-count")
@@ -29,7 +30,7 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}/read-count")
-    public ResponseEntity<Integer> getReadCount(@PathVariable int id) {
+    public ResponseEntity<Integer> getReadCount(@PathVariable Long id) {
         int readCount = articleService.getReadCount(id);
         return ResponseEntity.ok(readCount);
     }
