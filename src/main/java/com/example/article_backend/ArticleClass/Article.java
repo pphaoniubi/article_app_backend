@@ -1,20 +1,15 @@
 package com.example.article_backend.ArticleClass;
 
 
-import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
+
 public class Article {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     private String title;
-    @Lob
-    @Column(columnDefinition = "MEDIUMTEXT")
     private String content;
     private int readCount; // New field for read count
     private LocalDate publishDate;
