@@ -1,4 +1,4 @@
-package com.example.article_back.ArticleClass;
+package com.example.article_backend.ArticleClass;
 
 
 import java.time.LocalDate;
