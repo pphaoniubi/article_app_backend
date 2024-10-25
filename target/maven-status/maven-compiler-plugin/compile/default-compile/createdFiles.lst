@@ -1,5 +1,4 @@
 com\example\article_backend\ArticleClass\Article.class
 com\example\article_backend\ArticleClass\ArticleService.class
+com\example\article_backend\ArticleBackApplication.class
 com\example\article_backend\ArticleClass\ArticleController.class
-com\example\article_back\ArticleBackApplication.class
-com\example\article_backend\config\WebConfig.class
