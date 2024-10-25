@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/articles")
+@CrossOrigin(origins = "https://article-b35f6809c3dc.herokuapp.com/")
 public class ArticleController {
 
     @Autowired
