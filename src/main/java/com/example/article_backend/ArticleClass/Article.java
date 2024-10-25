@@ -2,7 +2,7 @@ package com.example.article_backend.ArticleClass;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 
 public class Article {
@@ -15,12 +15,12 @@ public class Article {
     private LocalDate publishDate;
 
     // Constructor
-    public Article(Long id, String title, String content) {
+    public Article(Long id, String title, LocalDate publishDate, String content) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.readCount = 0; // Initialize read count to 0
-        this.publishDate = LocalDate.now();
+        this.publishDate = publishDate;
     }
 
     public Article() {}
